@@ -8,7 +8,8 @@ interface Option {
         last_name: string, 
         gender: string, 
         dietary_restrictions: string, 
-        availabilities: string
+        availabilities: string,
+        images: string,
         } 
 }
 

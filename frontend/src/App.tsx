@@ -9,10 +9,39 @@ interface Option {
       last_name: string, 
       gender: string, 
       dietary_restrictions: string, 
-      availabilities: string
+      availabilities: string,
+      images: string
       } 
 }
 
+const fetchDaters = async () => {
+  console.log("Reached 1");
+  
+  try {
+    console.log("Reached 2");
+    
+    const response = await fetch('http://localhost:3100/api/daters');
+    const data = await response.json();
+    // Transform the fetched data into the Option format
+    const fetchedOptions = data.map((dater: any) => ({
+      dater_id: dater.dater_id,
+      values: {
+        first_name: dater.first_name,
+        last_name: dater.last_name,
+        gender: dater.gender,
+        dietary_restrictions: dater.dietary_restrictions,
+        availabilities: dater.availabilities,
+        images: dater.images
+      },
+    }));
+    console.log(fetchedOptions);
+    
+  } catch (error) {
+    console.error('Error fetching daters:', error);
+  }
+};
+
+fetchDaters();
 //TODO - Replace this options data with the Dater data from the PG sql table.
 // Make the lable their name. Make the value their dater_id (UUID) 
 
@@ -35,23 +64,30 @@ const App: React.FC = () => {
   // Fetch daters from the backend
   useEffect(() => {
     const fetchDaters = async () => {
+      console.log("Reached 1");
+      
       try {
+        console.log("Reached 2");
+        
         const response = await fetch('http://localhost:3100/api/daters');
         const data = await response.json();
         // Transform the fetched data into the Option format
-        const fetchedOptions = data.map((user: any) => ({
-          dater_id: user.dater_id,
+        const fetchedOptions = data.map((dater: any) => ({
+          dater_id: dater.dater_id,
           values: {
-            first_name: user.first_name,
-            last_name: user.last_name,
-            gender: user.gender,
-            dietary_restrictions: user.dietary_restrictions,
-            availabilities: user.availabilities,
+            first_name: dater.first_name,
+            last_name: dater.last_name,
+            gender: dater.gender,
+            dietary_restrictions: dater.dietary_restrictions,
+            availabilities: dater.availabilities,
+            images: dater.images
           },
         }));
         setOptions(fetchedOptions);
+        console.log(fetchedOptions);
+        
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error('Error fetching daters:', error);
       }
     };
 

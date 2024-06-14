@@ -2,17 +2,18 @@ import { Model, Table, Column, DataType } from "sequelize-typescript";
 
 @Table({
     tableName: "dater",
+    timestamps: false
 })
 
 export class Dater extends Model<Dater>{
 
     @Column({
-        type: DataType.INTEGER,
+        type: DataType.STRING,
         primaryKey: true,
-        autoIncrement: true,
+        // autoIncrement: true,
         field: "dater_id",
       })
-      dater_id!: number;
+      dater_id!: string;
 
     @Column({
         type: DataType.STRING(100),
@@ -43,4 +44,10 @@ export class Dater extends Model<Dater>{
         field: "availabilities",
     })
     availabilities!: string;
+
+    @Column({
+        type: DataType.STRING(300),
+        field: "images",
+    })
+    images!: string;
 }

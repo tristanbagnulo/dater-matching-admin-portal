@@ -1,10 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import routes from './routes/index.js'; // Ensure the .js extension
-import sequelize from './config/database.js'; // Ensure the .js extension
+import routes from './routes/index.js';
+import sequelize from './config/database.js';
+import cors from 'cors';
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use('/api', routes);
 
@@ -15,6 +17,8 @@ app.listen(PORT, async () => {
   try {
     await sequelize.sync(); // Sync the database when the server starts
     console.log('Database synced successfully.');
+    const tables = await sequelize.getQueryInterface().showAllSchemas();
+    console.log('Current database tables:', tables);
   } catch (error) {
     console.error('Failed to sync database:', error);
   }
