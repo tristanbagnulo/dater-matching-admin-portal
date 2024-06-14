@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 // Define the type for the dropdown options
 interface Option {
-    dater_id: number,
+    dater_id: string,
     values: {
         first_name: string, 
         last_name: string, 
@@ -23,7 +23,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedId = parseInt(event.target.value);
+    const selectedId = event.target.value;
     const selected = options.find(option => option.dater_id === selectedId) || null;
     setSelectedOption(selected);
     onSelect(selected);
