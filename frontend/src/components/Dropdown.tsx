@@ -46,6 +46,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
           <p>Last Name: {selectedOption.values.last_name}</p>
           <p>Gender: {selectedOption.values.gender}</p>
           <p>Dietary Restrictions: {selectedOption.values.dietary_restrictions}</p>
+          <img alt="unable to load" src={selectedOption.values.images[0]}></img>
         </div>
       )}
     </div>
